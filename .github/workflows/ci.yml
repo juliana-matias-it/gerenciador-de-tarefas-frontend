@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validar fluxo de branches
+        run: |
+          if [ "${{ github.base_ref }}" = "develop" ]; then
+            if [[ "${{ github.head_ref }}" != feature/* ]]; then
+              echo "ERRO: apenas branches feature/* podem abrir PR para develop."
+              exit 1
+            fi
+
+            echo "Fluxo válido: feature/* -> develop"
+          fi
+
+          if [ "${{ github.base_ref }}" = "main" ]; then
+            if [[ "${{ github.head_ref }}" != "develop" ]]; then
+              echo "ERRO: apenas a branch develop pode abrir PR para main."
+              exit 1
+            fi
+
+            echo "Fluxo válido: develop -> main"
+          fi
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build do Angular
+        run: npm run build
