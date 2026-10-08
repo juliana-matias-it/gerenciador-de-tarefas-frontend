@@ -1,0 +1,326 @@
+:host {
+    --rosa: #ff5ca8;
+    --rosa-claro: #ffd4e8;
+    --verde-limao: #b7ff3c;
+    --roxo: #7b4dff;
+    --azul: #45a3ff;
+    --azul-escuro: #21164d;
+    --creme: #fff7fb;
+    --branco: #ffffff;
+    --erro: #ff3f6c;
+
+    display: block;
+    min-height: 100vh;
+
+    font-family: "Pixelify Sans", sans-serif;
+    color: var(--azul-escuro);
+}
+
+.formulario-tarefa {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 48px 20px;
+
+    background-image: url('/images/cadastro-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+}
+
+.formulario-tarefa::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(33, 22, 77, 0.25);
+
+    pointer-events: none;
+}
+
+.formulario-tarefa__container {
+    width: 100%;
+    max-width: 620px;
+
+    box-sizing: border-box;
+
+    padding: 42px 36px;
+
+    position: relative;
+    z-index: 1;
+
+    background: rgba(255, 247, 251, 0.95);
+
+    border: 4px solid var(--azul-escuro);
+
+    box-shadow:
+        8px 8px 0 var(--roxo),
+        14px 14px 0 rgba(33, 22, 77, 0.18);
+}
+
+.formulario-tarefa__container::before {
+    content: "★";
+
+    position: absolute;
+    top: -24px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--rosa);
+    color: var(--branco);
+
+    border: 4px solid var(--azul-escuro);
+
+    font-size: 20px;
+
+    box-shadow:
+        4px 4px 0 var(--verde-limao);
+}
+
+.formulario-tarefa__cabecalho {
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+.formulario-tarefa__cabecalho h1 {
+    margin: 10px 0 14px;
+
+    font-family: "Press Start 2P", monospace;
+    font-size: 1.35rem;
+    line-height: 1.5;
+
+    text-transform: uppercase;
+
+    color: var(--azul-escuro);
+
+    text-shadow:
+        3px 3px 0 var(--rosa-claro);
+}
+
+.formulario-tarefa__cabecalho p {
+    margin: 0;
+
+    font-size: 1.05rem;
+    line-height: 1.6;
+
+    color: #594f83;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+.label-icon {
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--rosa);
+    color: var(--branco);
+
+    border: 2px solid var(--azul-escuro);
+
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.55rem;
+
+    box-shadow:
+        3px 3px 0 var(--verde-limao);
+}
+
+input,
+textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    background: var(--branco);
+    color: var(--azul-escuro);
+
+    border: 3px solid var(--azul-escuro);
+
+    outline: none;
+
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 1.05rem;
+
+    box-shadow:
+        4px 4px 0 var(--rosa-claro);
+
+    transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        border-color 120ms ease;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9a92b8;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--roxo);
+
+    box-shadow:
+        4px 4px 0 var(--verde-limao);
+
+    transform: translate(-1px, -1px);
+}
+
+.erro-campo {
+    color: var(--erro);
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+.mensagem-erro {
+    margin: 0 0 22px;
+
+    padding: 14px 16px;
+
+    background: #ffd2df;
+    color: #8f163a;
+
+    border: 3px solid var(--azul-escuro);
+
+    font-weight: 700;
+
+    box-shadow:
+        4px 4px 0 var(--azul-escuro);
+}
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+
+    margin-top: 8px;
+}
+
+.botao {
+    padding: 14px 18px;
+
+    border: 3px solid var(--azul-escuro);
+
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.68rem;
+
+    cursor: pointer;
+
+    box-shadow:
+        4px 4px 0 var(--azul-escuro);
+
+    transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        background 120ms ease;
+}
+
+.botao:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+
+    box-shadow:
+        6px 6px 0 var(--azul-escuro);
+}
+
+.botao:active:not(:disabled) {
+    transform: translate(2px, 2px);
+
+    box-shadow:
+        2px 2px 0 var(--azul-escuro);
+}
+
+.botao--cancelar {
+    background: var(--rosa-claro);
+    color: var(--azul-escuro);
+}
+
+.botao--salvar {
+    background: var(--verde-limao);
+    color: var(--azul-escuro);
+}
+
+.botao--salvar:disabled {
+    background: #dfffa8;
+    color: #82759e;
+
+    border-color: #6e6285;
+
+    cursor: not-allowed;
+
+    box-shadow:
+        4px 4px 0 #b5a7c9;
+
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .formulario-tarefa {
+        padding: 32px 16px;
+    }
+
+    .formulario-tarefa__container {
+        padding: 38px 22px 28px;
+    }
+
+    .formulario-tarefa__cabecalho h1 {
+        font-size: 1.05rem;
+    }
+
+    .acoes {
+        flex-direction: column-reverse;
+    }
+
+    .botao {
+        width: 100%;
+    }
+}

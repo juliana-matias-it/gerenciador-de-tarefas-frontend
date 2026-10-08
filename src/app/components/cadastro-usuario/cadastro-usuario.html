@@ -1,0 +1,111 @@
+<section class="cadastro">
+    <div class="cadastro__container">
+        <h1>Criar conta</h1>
+
+        <p class="cadastro__descricao">
+            Preencha seus dados para começar a organizar suas tarefas.
+        </p>
+
+        <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+            <div class="campo">
+                <label for="nome">
+                    <span class="label-icon" aria-hidden="true">★</span>
+                    Nome</label>
+
+                <input id="nome" type="text" formControlName="nome" placeholder="Digite seu nome" />
+
+                @if (
+                formulario.controls.nome.touched &&
+                formulario.controls.nome.hasError('required')
+                ) {
+                <span class="erro-campo">
+                    O nome é obrigatório.
+                </span>
+                }
+
+                @if (
+                formulario.controls.nome.touched &&
+                formulario.controls.nome.hasError('minlength')
+                ) {
+                <span class="erro-campo">
+                    O nome deve ter pelo menos 3 caracteres.
+                </span>
+                }
+
+                @if (
+                formulario.controls.nome.touched &&
+                formulario.controls.nome.hasError('maxlength')
+                ) {
+                <span class="erro-campo">
+                    O nome deve ter no máximo 50 caracteres.
+                </span>
+                }
+            </div>
+
+            <div class="campo">
+                <label for="email"><span class="label-icon" aria-hidden="true">@</span>E-mail</label>
+
+                <input id="email" type="email" formControlName="email" placeholder="seuemail@exemplo.com" />
+
+                @if (
+                formulario.controls.email.touched &&
+                formulario.controls.email.hasError('required')
+                ) {
+                <span class="erro-campo">
+                    O e-mail é obrigatório.
+                </span>
+                }
+
+                @if (
+                formulario.controls.email.touched &&
+                formulario.controls.email.hasError('email')
+                ) {
+                <span class="erro-campo">
+                    Informe um e-mail válido.
+                </span>
+                }
+            </div>
+
+            <div class="campo">
+                <label for="senha"> <span class="label-icon" aria-hidden="true">◆</span>Senha</label>
+
+                <input id="senha" type="password" formControlName="senha" placeholder="Mínimo de 8 caracteres" />
+
+                @if (
+                formulario.controls.senha.touched &&
+                formulario.controls.senha.hasError('required')
+                ) {
+                <span class="erro-campo">
+                    A senha é obrigatória.
+                </span>
+                }
+
+                @if (
+                formulario.controls.senha.touched &&
+                formulario.controls.senha.hasError('minlength')
+                ) {
+                <span class="erro-campo">
+                    A senha deve ter pelo menos 8 caracteres.
+                </span>
+                }
+            </div>
+
+            <button type="submit" [disabled]="formulario.invalid">
+                <span>Cadastrar</span>
+                <span class="button-arrow" aria-hidden="true">▶</span>
+            </button>
+        </form>
+
+        @if (mensagemSucesso()) {
+        <p class="mensagem-sucesso">
+            {{ mensagemSucesso() }}
+        </p>
+        }
+
+        @if (mensagemErro()) {
+        <p class="mensagem-erro">
+            {{ mensagemErro() }}
+        </p>
+        }
+    </div>
+</section>

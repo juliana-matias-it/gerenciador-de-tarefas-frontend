@@ -1,0 +1,128 @@
+<section class="tarefas">
+    <div class="tarefas__container">
+
+        <header class="tarefas__cabecalho">
+            <h1>Minhas tarefas</h1>
+
+            <p>
+                Organize suas tarefas.
+            </p>
+            <button type="button" class="botao-nova-tarefa" (click)="novaTarefa()">
+                + Nova tarefa
+            </button>
+        </header>
+
+        @if (mensagemSucesso()) {
+        <p class="mensagem-sucesso">
+            {{ mensagemSucesso() }}
+        </p>
+        }
+
+        @if (mensagemErro()) {
+        <p class="mensagem-erro">
+            {{ mensagemErro() }}
+        </p>
+        }
+
+        <section class="grupo-tarefas">
+            <h2>
+                <span aria-hidden="true">◆</span>
+                Pendentes
+            </h2>
+
+            @if (tarefasPendentes().length === 0) {
+            <p class="lista-vazia">
+                Nenhuma tarefa pendente.
+            </p>
+            } @else {
+            <div class="lista">
+                @for (tarefa of tarefasPendentes(); track tarefa.id) {
+                <article class="tarefa-card tarefa-card--pendente">
+                    <div class="tarefa-card__conteudo">
+                        <div class="tarefa-card__topo">
+                            <h3>{{ tarefa.titulo }}</h3>
+
+                            <span class="status status--pendente">
+                                Pendente
+                            </span>
+                        </div>
+
+                        <p class="tarefa-card__descricao">
+                            {{ tarefa.descricao }}
+                        </p>
+
+                        <p class="tarefa-card__data">
+                            <strong>Vencimento:</strong>
+                            {{ tarefa.dataDeVencimento | date:'dd/MM/yyyy HH:mm' }}
+                        </p>
+                    </div>
+
+                    <div class="tarefa-card__acoes">
+                        <button type="button" class="botao botao--editar" (click)="editar(tarefa.id)">
+                            Editar
+                        </button>
+
+                        <button type="button" class="botao botao--concluir" (click)="concluir(tarefa.id)">
+                            Concluir
+                        </button>
+
+                        <button type="button" class="botao botao--excluir" (click)="excluir(tarefa.id)">
+                            Excluir
+                        </button>
+                    </div>
+                </article>
+                }
+            </div>
+            }
+        </section>
+
+        <section class="grupo-tarefas">
+            <h2>
+                <span aria-hidden="true">★</span>
+                Concluídas
+            </h2>
+
+            @if (tarefasConcluidas().length === 0) {
+            <p class="lista-vazia">
+                Nenhuma tarefa concluída.
+            </p>
+            } @else {
+            <div class="lista">
+                @for (tarefa of tarefasConcluidas(); track tarefa.id) {
+                <article class="tarefa-card tarefa-card--concluida">
+                    <div class="tarefa-card__conteudo">
+                        <div class="tarefa-card__topo">
+                            <h3>{{ tarefa.titulo }}</h3>
+
+                            <span class="status status--concluida">
+                                Concluída
+                            </span>
+                        </div>
+
+                        <p class="tarefa-card__descricao">
+                            {{ tarefa.descricao }}
+                        </p>
+
+                        <p class="tarefa-card__data">
+                            <strong>Vencimento:</strong>
+                            {{ tarefa.dataDeVencimento | date:'dd/MM/yyyy HH:mm' }}
+                        </p>
+                    </div>
+
+                    <div class="tarefa-card__acoes">
+                        <button type="button" class="botao botao--editar" (click)="editar(tarefa.id)">
+                            Editar
+                        </button>
+
+                        <button type="button" class="botao botao--excluir" (click)="excluir(tarefa.id)">
+                            Excluir
+                        </button>
+                    </div>
+                </article>
+                }
+            </div>
+            }
+        </section>
+
+    </div>
+</section>
