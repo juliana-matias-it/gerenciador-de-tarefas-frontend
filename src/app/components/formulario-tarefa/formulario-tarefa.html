@@ -1,0 +1,158 @@
+<section class="formulario-tarefa">
+  <div class="formulario-tarefa__container">
+
+    <header class="formulario-tarefa__cabecalho">
+      <h1>
+        @if (modoEdicao()) {
+          Editar tarefa
+        } @else {
+          Nova tarefa
+        }
+      </h1>
+
+      <p>
+        @if (modoEdicao()) {
+          Atualize os dados da sua missão.
+        } @else {
+          Cadastre uma nova missão para organizar seu progresso.
+        }
+      </p>
+    </header>
+
+    @if (mensagemErro()) {
+      <p class="mensagem-erro">
+        {{ mensagemErro() }}
+      </p>
+    }
+
+    <form [formGroup]="formulario" (ngSubmit)="salvar()">
+
+      <div class="campo">
+        <label for="titulo">
+          <span class="label-icon" aria-hidden="true">★</span>
+          Título
+        </label>
+
+        <input
+          id="titulo"
+          type="text"
+          formControlName="titulo"
+          placeholder="Digite o título da tarefa"
+        />
+
+        @if (
+          formulario.controls.titulo.touched &&
+          formulario.controls.titulo.hasError('required')
+        ) {
+          <span class="erro-campo">
+            O título é obrigatório.
+          </span>
+        }
+
+        @if (
+          formulario.controls.titulo.touched &&
+          formulario.controls.titulo.hasError('minlength')
+        ) {
+          <span class="erro-campo">
+            O título deve ter pelo menos 3 caracteres.
+          </span>
+        }
+
+        @if (
+          formulario.controls.titulo.touched &&
+          formulario.controls.titulo.hasError('maxlength')
+        ) {
+          <span class="erro-campo">
+            O título deve ter no máximo 100 caracteres.
+          </span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="descricao">
+          <span class="label-icon" aria-hidden="true">◆</span>
+          Descrição
+        </label>
+
+        <textarea
+          id="descricao"
+          formControlName="descricao"
+          rows="5"
+          placeholder="Descreva a tarefa"
+        ></textarea>
+
+        @if (
+          formulario.controls.descricao.touched &&
+          formulario.controls.descricao.hasError('required')
+        ) {
+          <span class="erro-campo">
+            A descrição é obrigatória.
+          </span>
+        }
+
+        @if (
+          formulario.controls.descricao.touched &&
+          formulario.controls.descricao.hasError('minlength')
+        ) {
+          <span class="erro-campo">
+            A descrição deve ter pelo menos 3 caracteres.
+          </span>
+        }
+
+        @if (
+          formulario.controls.descricao.touched &&
+          formulario.controls.descricao.hasError('maxlength')
+        ) {
+          <span class="erro-campo">
+            A descrição deve ter no máximo 500 caracteres.
+          </span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="dataDeVencimento">
+          <span class="label-icon" aria-hidden="true">♥</span>
+          Vencimento
+        </label>
+
+        <input
+          id="dataDeVencimento"
+          type="datetime-local"
+          formControlName="dataDeVencimento"
+        />
+
+        @if (
+          formulario.controls.dataDeVencimento.touched &&
+          formulario.controls.dataDeVencimento.hasError('required')
+        ) {
+          <span class="erro-campo">
+            A data de vencimento é obrigatória.
+          </span>
+        }
+      </div>
+
+      <div class="acoes">
+        <button
+          type="button"
+          class="botao botao--cancelar"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="botao botao--salvar"
+          [disabled]="formulario.invalid"
+        >
+          @if (modoEdicao()) {
+            Salvar alterações
+          } @else {
+            Criar tarefa
+          }
+        </button>
+      </div>
+
+    </form>
+  </div>
+</section>

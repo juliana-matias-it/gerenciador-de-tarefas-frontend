@@ -45,28 +45,30 @@ export class CadastroUsuario {
   });
 
   cadastrar(): void {
-  if (this.formulario.invalid) {
-    this.formulario.markAllAsTouched();
-    return;
-  }
-
-  this.mensagemSucesso.set('');
-  this.mensagemErro.set('');
-
-  this.usuarioService.cadastrar(this.formulario.getRawValue()).subscribe({
-    next: () => {
-      this.mensagemSucesso.set('Usuário cadastrado com sucesso.');
-      this.formulario.reset();
-    },
-
-    error: (erro) => {
-      
-      this.mensagemErro.set(
-        erro.error?.message ?? 'Não foi possível realizar o cadastro.'
-      );
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
     }
-  });
-}
 
+    this.mensagemSucesso.set('');
+    this.mensagemErro.set('');
 
+    this.usuarioService.cadastrar(this.formulario.getRawValue()).subscribe({
+      next: (usuario) => {
+        if (usuario.id) {
+          localStorage.setItem('usuarioId', usuario.id);
+        }
+
+        this.mensagemSucesso.set('Usuário cadastrado com sucesso.');
+        this.formulario.reset();
+      },
+
+      error: (erro) => {
+
+        this.mensagemErro.set(
+          erro.error?.message ?? 'Não foi possível realizar o cadastro.'
+        );
+      }
+    });
+  }
 }
