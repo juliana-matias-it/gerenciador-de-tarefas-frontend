@@ -8,7 +8,7 @@ The frontend communicates with a REST API built with ASP.NET Core.
 
 ## Preview
 
-![Task Manager application preview](docs/images/task-manager.png)
+![Task Manager application preview](docs/images/gerenciador-tarefas.png)
 
 ## Features
 
