@@ -1,5 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AutenticacaoService } from '../../services/autenticacao.service';
 
 @Component({
@@ -10,13 +16,18 @@ import { AutenticacaoService } from '../../services/autenticacao.service';
 })
 export class Login {
   mensagem = signal('');
+
+  private readonly router = inject(Router);
   autenticacao = inject(AutenticacaoService);
+
   formulario = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.email,
     ]),
-    senha: new FormControl('', [Validators.required]),
+    senha: new FormControl('', [
+      Validators.required,
+    ]),
   });
 
   entrar(): void {
@@ -30,10 +41,10 @@ export class Login {
     const { email, senha } = this.formulario.getRawValue();
 
     this.autenticacao.login(email ?? '', senha ?? '').subscribe({
-      next: (usuario) => {
-        this.mensagem.set(`Olá, ${usuario.nome}! Login realizado.`);
+      next: () => {
+        void this.router.navigate(['/tarefas']);
       },
-      error: (erro) => {
+      error: erro => {
         this.mensagem.set(
           erro.status === 401
             ? 'E-mail ou senha inválidos.'
@@ -43,4 +54,3 @@ export class Login {
     });
   }
 }
-
