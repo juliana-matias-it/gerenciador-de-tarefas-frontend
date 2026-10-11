@@ -20,4 +20,7 @@
         }
         <button type="submit">Entrar</button>
     </form>
+    @if (mensagem()) {
+    <p role="status">{{ mensagem() }}</p>
+    }
 </section>
