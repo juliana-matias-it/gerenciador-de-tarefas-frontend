@@ -1,0 +1,92 @@
+<main class="pagina-tarefas">
+  <header>
+    <h1>Minhas tarefas</h1>
+    <p>Olá, {{ usuario()?.nome }}!</p>
+  </header>
+
+  @if (mensagem()) {
+    <p class="mensagem" role="status">{{ mensagem() }}</p>
+  }
+
+  @if (carregando()) {
+    <p>Carregando tarefas...</p>
+  } @else {
+    @if (tarefas().length === 0) {
+      <p>Nenhuma tarefa cadastrada.</p>
+    } @else {
+      <section aria-labelledby="titulo-pendentes">
+        <h2 id="titulo-pendentes">Pendentes</h2>
+
+        @for (tarefa of pendentes(); track tarefa.id) {
+          <article class="tarefa">
+            <h3>{{ tarefa.titulo }}</h3>
+            <p>{{ tarefa.descricao }}</p>
+            <p>
+              Vencimento:
+              {{ tarefa.dataDeVencimento | date:'dd/MM/yyyy' }}
+            </p>
+            <span class="status">Pendente</span>
+
+            <div class="acoes">
+              <a [routerLink]="['/tarefas/editar', tarefa.id]">
+                Editar
+              </a>
+
+              <button
+                type="button"
+                (click)="concluir(tarefa)"
+                [disabled]="operacaoEmAndamento()"
+              >
+                Concluir
+              </button>
+
+              <button
+                type="button"
+                class="excluir"
+                (click)="excluir(tarefa)"
+                [disabled]="operacaoEmAndamento()"
+              >
+                Excluir
+              </button>
+            </div>
+          </article>
+        } @empty {
+          <p>Nenhuma tarefa pendente.</p>
+        }
+      </section>
+
+      <section aria-labelledby="titulo-concluidas">
+        <h2 id="titulo-concluidas">Concluídas</h2>
+
+        @for (tarefa of concluidas(); track tarefa.id) {
+          <article class="tarefa concluida">
+            <h3>{{ tarefa.titulo }}</h3>
+            <p>{{ tarefa.descricao }}</p>
+            <p>
+              Vencimento:
+              {{ tarefa.dataDeVencimento | date:'dd/MM/yyyy' }}
+            </p>
+            <span class="status">Concluída</span>
+
+            <div class="acoes">
+              <a [routerLink]="['/tarefas/editar', tarefa.id]">
+                Editar
+              </a>
+
+              <button
+                type="button"
+                class="excluir"
+                (click)="excluir(tarefa)"
+                [disabled]="operacaoEmAndamento()"
+              >
+                Excluir
+              </button>
+            </div>
+          </article>
+        } @empty {
+          <p>Nenhuma tarefa concluída.</p>
+        }
+      </section>
+    }
+  }
+</main>
