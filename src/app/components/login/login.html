@@ -1,0 +1,42 @@
+<section class="login-card">
+  <h1>Login</h1>
+
+  <form [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
+    <label for="email">E-mail</label>
+
+    <input id="email" type="email" formControlName="email" autocomplete="email" required />
+
+    @if (formulario.controls.email.touched && formulario.controls.email.hasError('required')) {
+      <small class="erro">Informe seu e-mail.</small>
+    }
+
+    @if (formulario.controls.email.touched && formulario.controls.email.hasError('email')) {
+      <small class="erro">Informe um e-mail válido.</small>
+    }
+
+    <label for="senha">Senha</label>
+
+    <input
+      id="senha"
+      type="password"
+      formControlName="senha"
+      autocomplete="current-password"
+      required
+    />
+
+    @if (formulario.controls.senha.touched && formulario.controls.senha.hasError('required')) {
+      <small class="erro">Informe sua senha.</small>
+    }
+
+    <button type="submit" [disabled]="formulario.invalid">Entrar</button>
+  </form>
+
+  <p class="cadastro-link">
+    Ainda não tem uma conta?
+    <a routerLink="/cadastro">Cadastre-se</a>
+  </p>
+
+  @if (mensagem()) {
+    <p role="status" aria-live="polite">{{ mensagem() }}</p>
+  }
+</section>

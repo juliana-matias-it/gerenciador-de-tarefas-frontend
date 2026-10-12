@@ -1,0 +1,100 @@
+
+<div class="formulario-card">
+  <h1>{{ editando ? 'Editar tarefa' : 'Nova tarefa' }}</h1>
+
+  @if (mensagem) {
+    <p class="erro" role="alert">{{ mensagem }}</p>
+  }
+
+  <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()" novalidate>
+    <div class="campo">
+      <label for="titulo">Título</label>
+
+      <input
+        id="titulo"
+        type="text"
+        formControlName="titulo"
+        maxlength="100"
+        placeholder="Digite o título da tarefa"
+      />
+
+      @if (formulario.controls.titulo.touched && formulario.controls.titulo.hasError('required')) {
+        <small class="erro">O título é obrigatório.</small>
+      }
+
+      @if (formulario.controls.titulo.hasError('minlength')) {
+        <small class="erro"> O título deve ter entre 3 e 100 caracteres. </small>
+      }
+
+      @if (formulario.controls.titulo.hasError('maxlength')) {
+        <small class="erro"> O título deve ter no máximo 100 caracteres. </small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="descricao">Descrição</label>
+
+      <textarea
+        id="descricao"
+        formControlName="descricao"
+        maxlength="500"
+        rows="4"
+        placeholder="Descreva a tarefa"
+      ></textarea>
+
+      @if (
+        formulario.controls.descricao.touched && formulario.controls.descricao.hasError('required')
+      ) {
+        <small class="erro">A descrição é obrigatória.</small>
+      }
+
+      @if (formulario.controls.descricao.hasError('minlength')) {
+        <small class="erro"> A descrição deve ter entre 3 e 500 caracteres. </small>
+      }
+
+      @if (formulario.controls.descricao.hasError('maxlength')) {
+        <small class="erro"> A descrição deve ter no máximo 500 caracteres. </small>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="dataDeVencimento">Data de vencimento</label>
+
+      <input
+        id="dataDeVencimento"
+        type="date"
+        formControlName="dataDeVencimento"
+        [min]="dataAtual"
+      />
+
+      @if (
+        formulario.controls.dataDeVencimento.touched &&
+        formulario.controls.dataDeVencimento.hasError('required')
+      ) {
+        <small class="erro"> A data de vencimento é obrigatória. </small>
+      }
+
+      @if (
+        formulario.controls.dataDeVencimento.touched &&
+        formulario.controls.dataDeVencimento.hasError('dataAnterior')
+      ) {
+        <small class="erro"> A data de vencimento não pode ser anterior à data atual. </small>
+      }
+    </div>
+
+    <div class="acoes">
+      <button type="submit" [disabled]="formulario.invalid || salvando || carregando">
+        @if (salvando) {
+          Salvando...
+        } @else {
+          {{ editando ? 'Salvar alterações' : 'Criar tarefa' }}
+        }
+      </button>
+
+      <button type="button" class="botao-cancelar" (click)="cancelar()" [disabled]="salvando">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+

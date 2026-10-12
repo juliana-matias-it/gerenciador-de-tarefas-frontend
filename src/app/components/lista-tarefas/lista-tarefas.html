@@ -1,0 +1,96 @@
+<main class="lista-container">
+  <nav class="barra-navegacao">
+    <div class="usuario-menu">
+      <span>Olá, {{ usuario()?.nome }}!</span>
+
+      <button
+        type="button"
+        class="botao-sair"
+        (click)="sair()"
+        [disabled]="operacaoEmAndamento()"
+      >
+        Sair
+      </button>
+    </div>
+  </nav>
+
+  <header class="cabecalho-lista">
+    <h1>Minhas tarefas</h1>
+
+    <a class="botao-nova-tarefa" routerLink="/tarefas/nova">
+      Nova tarefa
+    </a>
+  </header>
+
+  @if (mensagem()) {
+    <p role="alert" class="mensagem-erro">
+      {{ mensagem() }}
+    </p>
+  }
+
+  @if (carregando()) {
+    <p>Carregando tarefas...</p>
+  } @else {
+    <section>
+      <h2>Pendentes</h2>
+
+      @if (pendentes().length === 0) {
+        <p>Você não tem tarefas pendentes.</p>
+      } @else {
+        @for (tarefa of pendentes(); track tarefa.id) {
+          <article class="tarefa-card">
+            <div>
+              <h3>{{ tarefa.titulo }}</h3>
+              <p>{{ tarefa.descricao }}</p>
+              <p>
+                Vencimento:
+                {{ tarefa.dataDeVencimento | date: 'dd/MM/yyyy' }}
+              </p>
+              <p>Status: {{ tarefa.status }}</p>
+            </div>
+
+            <div class="acoes-tarefa">
+              <a [routerLink]="['/tarefas/editar', tarefa.id]"> Editar </a>
+
+              <button type="button" (click)="concluir(tarefa)" [disabled]="operacaoEmAndamento()">
+                Concluir
+              </button>
+
+              <button type="button" (click)="excluir(tarefa)" [disabled]="operacaoEmAndamento()">
+                Excluir
+              </button>
+            </div>
+          </article>
+        }
+      }
+    </section>
+
+    <section>
+      <h2>Concluídas</h2>
+
+      @if (concluidas().length === 0) {
+        <p>Você ainda não concluiu nenhuma tarefa.</p>
+      } @else {
+        @for (tarefa of concluidas(); track tarefa.id) {
+          <article class="tarefa-card">
+            <div>
+              <h3>{{ tarefa.titulo }}</h3>
+              <p>{{ tarefa.descricao }}</p>
+              <p>
+                Vencimento:
+                {{ tarefa.dataDeVencimento | date: 'dd/MM/yyyy' }}
+              </p>
+              <p>Status: {{ tarefa.status }}</p>
+            </div>
+
+            <div class="acoes-tarefa">
+              <button type="button" (click)="excluir(tarefa)" [disabled]="operacaoEmAndamento()">
+                Excluir
+              </button>
+            </div>
+          </article>
+        }
+      }
+    </section>
+  }
+</main>
