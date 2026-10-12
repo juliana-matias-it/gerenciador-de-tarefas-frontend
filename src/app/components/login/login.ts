@@ -1,16 +1,12 @@
+
 import { Component, inject, signal } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
+import {ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AutenticacaoService } from '../../services/autenticacao.service';
 
 @Component({
-  imports: [ReactiveFormsModule],
   selector: 'app-login',
+  imports: [ReactiveFormsModule, RouterLink],
   styleUrl: './login.css',
   templateUrl: './login.html',
 })
@@ -18,7 +14,7 @@ export class Login {
   mensagem = signal('');
 
   private readonly router = inject(Router);
-  autenticacao = inject(AutenticacaoService);
+  private readonly autenticacao = inject(AutenticacaoService);
 
   formulario = new FormGroup({
     email: new FormControl('', [
@@ -44,7 +40,7 @@ export class Login {
       next: () => {
         void this.router.navigate(['/tarefas']);
       },
-      error: erro => {
+      error: (erro) => {
         this.mensagem.set(
           erro.status === 401
             ? 'E-mail ou senha inválidos.'

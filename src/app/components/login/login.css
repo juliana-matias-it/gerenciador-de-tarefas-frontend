@@ -56,6 +56,31 @@ button:hover {
   background-color: #8FBFE6;
 }
 
+.cadastro-link {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #3D3A4A;
+}
+
+.cadastro-link a {
+  color: #5B91BD;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.cadastro-link a:hover {
+  color: #3D739F;
+  text-decoration: underline;
+}
+
+.cadastro-link a:focus-visible {
+  outline: 2px solid #5B91BD;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 .erro {
   color: #3D3A4A;
   border-left: 3px solid #F4A9A0;
