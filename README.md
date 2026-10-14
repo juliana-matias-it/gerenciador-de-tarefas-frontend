@@ -6,6 +6,10 @@ The application allows users to register, log in, manage their tasks, and log ou
 
 The frontend communicates with a REST API built with ASP.NET Core.
 
+## Preview
+
+![Task Manager application preview](taskmanager.png)
+
 ## Features
 
 - User registration
