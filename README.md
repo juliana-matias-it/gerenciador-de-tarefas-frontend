@@ -1,59 +1,153 @@
-# GerenciadorDeTarefas
+# Task Manager Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0.
+Frontend application for a task management system built with Angular.
 
-## Development server
+The application allows users to register, log in, manage their tasks, and log out through a responsive interface.
 
-To start a local development server, run:
+The frontend communicates with a REST API built with ASP.NET Core.
 
-```bash
-ng serve
+## Features
+
+- User registration
+- User login and logout
+- Form validation
+- API error handling
+- Task listing by user
+- Separate pending and completed tasks
+- Create new tasks
+- Edit existing tasks
+- Mark tasks as completed
+- Delete tasks
+- Empty-state messages
+- Success and error feedback
+- Responsive interface
+
+## Technologies
+
+- Angular
+- TypeScript
+- HTML
+- CSS
+- Reactive Forms
+- Angular Router
+- Angular HttpClient
+- RxJS
+
+The application consumes a backend built with:
+
+- .NET 10
+- ASP.NET Core Web API
+- Entity Framework Core
+- SQLite
+
+## Main Features
+
+### User Registration
+
+Allows new users to create an account, with validation for name, email, and password.
+
+### Login and Logout
+
+Allows registered users to log in to access their tasks and log out when finished.
+
+### Task List
+
+Displays tasks associated with the current user, separated into pending and completed tasks.
+
+Available actions include:
+
+- Create a task
+- Edit a task
+- Mark a task as completed
+- Delete a task
+
+### Task Form
+
+A reusable form for creating and editing tasks.
+
+The form contains:
+
+- Title
+- Description
+- Due date
+
+## API Integration
+
+The frontend communicates with the backend through HTTP requests.
+
+The backend API must be running for registration, login, and task management to work.
+
+The local API address used in the project is:
+
+```text
+http://localhost:5161
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+If your backend runs at a different address, update the API URLs configured in the frontend.
 
-## Code scaffolding
+## Running the Project
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Requirements
 
-```bash
-ng generate component component-name
-```
+- Node.js
+- npm
+- Backend API running locally
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### 1. Clone the repository
 
 ```bash
-ng build
+git clone https://github.com/juliana-matias-it/gerenciador-de-tarefas-frontend.git
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 2. Enter the project directory
 
 ```bash
-ng test
+cd gerenciador-de-tarefas-frontend
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### 3. Install dependencies
 
 ```bash
-ng e2e
+npm install
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 4. Start the application
 
-## Additional Resources
+```bash
+npm start
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The application will be available at:
+
+```text
+http://localhost:4200
+```
+
+## Backend
+
+This frontend depends on the Task Manager backend API, built with ASP.NET Core Web API, Entity Framework Core, and SQLite.
+
+[Backend repository](https://github.com/juliana-matias-it/gerenciador-de-tarefas-backend)
+
+Both applications must be running for the complete system to work.
+
+## Project Background
+
+This project was developed collaboratively during the WoMakersCode bootcamp.
+
+The team organized the work through GitHub issues, feature branches, and pull requests.
+
+This repository is a personal fork synchronized with the final version of the collaborative project and maintained as part of my portfolio.
+
+Original repositories:
+
+- [Frontend](https://github.com/womakers-squad-jaqueline-goes/gerenciador-de-tarefas-frontend)
+- [Backend](https://github.com/womakers-squad-jaqueline-goes/gerenciador-de-tarefas-backend)
+
+## Portfolio
+
+**Juliana Matias**
+
+Software Developer
+
+[GitHub](https://github.com/juliana-matias-it)
